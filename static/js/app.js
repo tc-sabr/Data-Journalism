@@ -64,4 +64,35 @@ d3.csv('data/data.csv').then(function(stateData) {
 
     chartGroup.append('g')
         .call(leftAxis);
+
+    //create cirles on chart
+    var circlesGroup = chartGroup.selectAll('circle')
+        .data(stateData)
+        .enter()
+        .append('circle')
+        .attr('cx', d => xLinearScale(d.poverty))
+        .attr('cy', d => yLinearScale(d.healthcare))
+        .attr('r', '15')
+        .attr('fill', 'blue')
+        .attr('opacity', '.5')
+        .classed('stateCircle', true);
+
+    //add x & y axis labels
+    //x axis
+    chartGroup.append('text')
+        .attr("transform", `translate(${width / 2}, ${height + 20})`)
+        .attr("x", 0)
+        .attr("y", 20)  
+        .classed("active", true)
+        .text("In Poverty (%)");
+
+    //y axis
+    chartGroup.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .classed("active", true)
+        .text("Lacks Healthcare (%)");
+
 });
