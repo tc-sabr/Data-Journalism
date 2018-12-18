@@ -66,7 +66,7 @@ d3.csv('data/data.csv').then(function(stateData) {
         .call(leftAxis);
 
     //create cirles on chart
-    var circlesGroup = chartGroup.selectAll('circle')
+    chartGroup.selectAll('circle')
         .data(stateData)
         .enter()
         .append('circle')
@@ -76,6 +76,16 @@ d3.csv('data/data.csv').then(function(stateData) {
         .attr('fill', 'blue')
         .attr('opacity', '.5')
         .classed('stateCircle', true);
+
+    //add state abbr to circles
+    chartGroup.selectAll('text')
+        .data(stateData)
+        .enter()
+        .append('text')
+        .text(d => d.abbr)
+        .classed('stateText', true)
+        .attr('dx', d => xLinearScale(d.poverty))
+        .attr('dy', d => yLinearScale(d.healthcare))
 
     //add x & y axis labels
     //x axis
