@@ -52,4 +52,16 @@ d3.csv('data/data.csv').then(function(stateData) {
     var yLinearScale = d3.scaleLinear()
         .domain(d3.extent(stateData, d => d.healthcare))
         .range([height, 0]);
+
+    //create axis functions
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
+
+    //append axis to charts
+    chartGroup.append('g')
+        .attr('transform', `translate(0, ${height})`)
+        .call(bottomAxis);
+
+    chartGroup.append('g')
+        .call(leftAxis);
 });
