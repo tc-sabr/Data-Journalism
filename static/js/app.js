@@ -72,7 +72,7 @@ d3.csv('data/data.csv').then(function(stateData) {
         .append('circle')
         .attr('cx', d => xLinearScale(d.poverty))
         .attr('cy', d => yLinearScale(d.healthcare))
-        .attr('r', '15')
+        .attr('r', '10')
         .attr('fill', 'blue')
         .attr('opacity', '.5')
         .classed('stateCircle', true);
